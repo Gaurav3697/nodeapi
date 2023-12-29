@@ -1,14 +1,33 @@
 import { User } from "../models/user.js";
 
 
-export const getUserId = async(req,res)=>{   //dynamic route
-    const {id} = req.query;
-    // const user = await User.findById(id);
-    console.log(req.params);
+export const getUserDetail = async(req,res)=>{   //dynamic route
+    const {id} = req.params;
+    const user = await User.findById(id);
+    
+    res.json({
+        success:true,
+        user,
+    })
+} 
+
+export const updateUser = async(req,res)=>{   //dynamic route
+    const {id} = req.params;
+    const user = await User.findById(id);
 
     res.json({
         success:true,
-        user:{},
+        message:"Updated",
+    });
+} ;
+
+export const deleteUser = async(req,res)=>{   //dynamic route
+    const {id} = req.params;
+    const user = await User.findById(id);
+
+    res.json({
+        success:true,
+        messsage: "Deleted",
     })
 } 
 
