@@ -37,13 +37,14 @@ app.get("/users/all",async(req,res)=>{
     });
 });
 
-app.get("/userid",async(req,res)=>{
+app.get("/userid/:id",async(req,res)=>{   //dynamic route
     const {id} = req.query;
-    const user = await User.findById(id);
+    // const user = await User.findById(id);
+    console.log(req.params);
 
     res.json({
         success:true,
-        user,
+        user:{},
     })
 })
 
