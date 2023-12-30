@@ -1,58 +1,51 @@
 import { User } from "../models/user.js";
+import bcrypt from "bcrypt";
+import { sendCookies } from "../utils/features.js";
 
+export const getMyProfile = async(req,res)=>{   
 
-export const getUserDetail = async(req,res)=>{   //dynamic route
-    const {id} = req.params;
-    const user = await User.findById(id);
-    
-    res.json({
+    res.status(200).json({
         success:true,
-        user,
-    })
+        user:req.user,
+    });
 } 
 
-export const updateUser = async(req,res)=>{   //dynamic route
-    const {id} = req.params;
-    const user = await User.findById(id);
 
-    res.json({
-        success:true,
-        message:"Updated",
-    });
-} ;
-
-export const deleteUser = async(req,res)=>{   //dynamic route
-    const {id} = req.params;
-    const user = await User.findById(id);
-
-    res.json({
-        success:true,
-        messsage: "Deleted",
-    })
-} 
-
-export const getAllUsers = async(req,res)=>{
-
-    const users = await User.find({})
-    console.log(req.query);
-
-    res.json({
-        success:true,
-        users,           //since key value is same pass as users
-    });
+export const login = async(req,res,next)=>{
+        const {email,password} = req.body;
+    const user = await User.findOne({email}).select("+password");
+    if(!user){
+        return res.status(404).json({
+            success:false,
+            message:"Invalid Email or Password",
+        })
+    }
+    const isMatch = await bcrypt.compare(password,user.password);
+    if(!isMatch){
+        sendCookies(user,res,`Welcome back, ${user.name}`,200);
+    }
 }
+export const logout = async(req,res)=>{
+    res.status(200).cookie("token","",{
+        expires:new Date(Date.now())
+    })
+    .json({success:true,})
+};
 
-export const CreateNewUser = async(req,res)=>{
+export const register = async(req,res)=>{
     const {name,email,password} = req.body;
-
-    const users = await User.create({
+    let user = await User.findOne({email});
+    if (user) return res.status(404).json({
+        success:false,
+        message:"User already exist",
+    })
+    const hashedPassword = await bcrypt.hash(password,10)
+    user = await User.create({
         name,
         email,
-        password,
-    });
+        password:hashedPassword,
+    })
 
-    res.json({
-        success:true,
-        message:"registered successfully",           //since key value is same pass as users
-    });
+    sendCookies(user,res,"Registered successfully",201);
+
 }

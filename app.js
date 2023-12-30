@@ -1,16 +1,18 @@
 import express from "express";
 import userRoutes from "./routes/user.js";
 import {config} from "dotenv";
+import cookieParser from "cookie-parser";
 
 config({
     path:"./data/config.env",
 });
 
 export const app = express();
+app.use(cookieParser());
 
 //Using Middleware
 app.use(express.json()); 
-app.use("/users",userRoutes);         //It tells that in all the user's routes /users is already present
+app.use("/api/v1/users",userRoutes);         //It tells that in all the user's routes /users is already present
 
 app.get("/",(req,res)=>{
     res.send("Nice working");
