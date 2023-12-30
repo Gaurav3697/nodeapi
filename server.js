@@ -4,5 +4,5 @@ import {connectDB} from "./data/database.js"
 connectDB();
 
 app.listen(process.env.PORT,()=>{
-    console.log("server is working")
-})
+    console.log(`server is working on port:${process.env.PORT} in ${process.env.NODE_ENV} mode`);
+});
