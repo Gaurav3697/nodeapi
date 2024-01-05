@@ -5,6 +5,6 @@ mongoose
   .connect(process.env.MONGO_URI, {
     dbName: "backendapi",
   })
-  .then(() => console.log("Database conected"))
+  .then((c) => console.log(`Database conected with ${c.connection.host}`))
   .catch((e) => console.log(e));
 };
