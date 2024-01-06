@@ -2,7 +2,7 @@ import express from "express";
 import {
   register,
   login,
-  logout,
+  logout, 
   getMyProfile,
 } from "../controllers/user.js";
 import { isAuthenticated } from "../middlewares/auth.js";

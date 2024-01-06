@@ -17,9 +17,8 @@ app.use(cookieParser());
 app.use(express.json()); 
 app.use("/api/v1/users",userRoutes);         //It tells that in all the user's routes /users is already present
 app.use("/api/v1/task",taskRoutes); 
-app.use(errorMiddleware);
 app.use(cors({
-    origin:[process.env.FRONTEND_URL],
+    origin:"http://localhost:5173",
     methods:["GET","POST","PUT","DELETE"],
     credentials:true,
 }))
@@ -27,3 +26,6 @@ app.use(cors({
 app.get("/",(req,res)=>{
     res.send("Nice working");
 })
+
+//using Middleware
+app.use(errorMiddleware);
