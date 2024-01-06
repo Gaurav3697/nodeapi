@@ -6,12 +6,12 @@ import {config} from "dotenv";
 import cookieParser from "cookie-parser";
 import { errorMiddleware } from "./middlewares/error.js";
 
-app.options('*', cors());
 config({
     path:"./data/config.env",
 });
 
 export const app = express();
+app.options('*', cors());
 app.use(cookieParser());
 
 //Using Middleware
