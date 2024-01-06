@@ -18,7 +18,7 @@ app.use(express.json());
 app.use("/api/v1/users",userRoutes);         //It tells that in all the user's routes /users is already present
 app.use("/api/v1/task",taskRoutes); 
 app.use(cors({
-    origin:"http://localhost:5173",
+    origin:"*",
     methods:["GET","POST","PUT","DELETE"],
     credentials:true,
 }))
