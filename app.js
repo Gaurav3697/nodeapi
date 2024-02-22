@@ -13,7 +13,7 @@ config({
 export const app = express();
 app.use(cookieParser());
 app.use(cors({
-    origin: process.env.FRONTEND_URL ? [process.env.FRONTEND_URL] : "https://react-todo-8k5vabyut-gauravs-projects-3d02f3e1.vercel.app/",
+    origin: '*',
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
 }));
