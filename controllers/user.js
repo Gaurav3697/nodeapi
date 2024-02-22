@@ -5,6 +5,15 @@ import ErrorHandler from "../middlewares/error.js";
 
 export const getMyProfile = async (req, res,next) => {
     try {
+        res.send("Nice working");
+        res.setHeader("Access-Control-Allow-Origin", "*");
+        res.setHeader("Access-Control-Allow-Credentials", "true");
+        res.setHeader("Access-Control-Max-Age", "1800");
+        res.setHeader("Access-Control-Allow-Headers", "content-type");
+        res.setHeader(
+          "Access-Control-Allow-Methods",
+          "PUT, POST, GET, DELETE, PATCH, OPTIONS"
+        );
         res.status(200).json({
             success: true,
             user: req.user,
@@ -16,6 +25,15 @@ export const getMyProfile = async (req, res,next) => {
 
 export const login = async (req, res, next) => {
     try {
+        res.send("Nice working");
+        res.setHeader("Access-Control-Allow-Origin", "*");
+        res.setHeader("Access-Control-Allow-Credentials", "true");
+        res.setHeader("Access-Control-Max-Age", "1800");
+        res.setHeader("Access-Control-Allow-Headers", "content-type");
+        res.setHeader(
+          "Access-Control-Allow-Methods",
+          "PUT, POST, GET, DELETE, PATCH, OPTIONS"
+        );
         const { email, password } = req.body;
         const user = await User.findOne({ email }).select("+password");
         if (!user) return next(new ErrorHandler("Invalid Email or password", 400));
@@ -31,6 +49,15 @@ export const login = async (req, res, next) => {
 };
 export const logout = async (req, res) => {
     try {
+        res.send("Nice working");
+        res.setHeader("Access-Control-Allow-Origin", "*");
+        res.setHeader("Access-Control-Allow-Credentials", "true");
+        res.setHeader("Access-Control-Max-Age", "1800");
+        res.setHeader("Access-Control-Allow-Headers", "content-type");
+        res.setHeader(
+          "Access-Control-Allow-Methods",
+          "PUT, POST, GET, DELETE, PATCH, OPTIONS"
+        );
         res
         .status(200)
         .cookie("token", "", {
@@ -46,6 +73,15 @@ export const logout = async (req, res) => {
 
 export const register = async (req, res , next) => {
     try {
+        res.send("Nice working");
+        res.setHeader("Access-Control-Allow-Origin", "*");
+        res.setHeader("Access-Control-Allow-Credentials", "true");
+        res.setHeader("Access-Control-Max-Age", "1800");
+        res.setHeader("Access-Control-Allow-Headers", "content-type");
+        res.setHeader(
+          "Access-Control-Allow-Methods",
+          "PUT, POST, GET, DELETE, PATCH, OPTIONS"
+        );
         const { name, email, password } = req.body;
         let user = await User.findOne({ email });
         if (user) {
