@@ -1,8 +1,23 @@
-import {app} from "./app.js";
-import {connectDB} from "./data/database.js"
+// My code
+
+// import {app} from "./app.js";
+// import {connectDB} from "./data/database.js"
+
+// connectDB();
+
+// app.listen(process.env.PORT,()=>{
+//     console.log(`server is working on port:${process.env.PORT} in ${process.env.NODE_ENV} mode`);
+// });
+
+// abhishek's code
+
+import { app } from "./app.js";
+import { connectDB } from "./data/database.js";
 
 connectDB();
 
-app.listen(process.env.PORT,()=>{
-    console.log(`server is working on port:${process.env.PORT} in ${process.env.NODE_ENV} mode`);
+app.listen(process.env.PORT, () => {
+  console.log(
+    `Server is working on port:${process.env.PORT} in ${process.env.NODE_ENV} Mode`
+  );
 });
